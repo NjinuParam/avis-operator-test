@@ -1,0 +1,146 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-button>
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>-->
+      <ion-button>
+        <ion-back-button></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Quote summary</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-button expand="full" color="light" class="ion-margin-top-50">Summary of current leg</ion-button>
+  <!-- <ng-container *ngFor="let booking of bookings"> -->
+  <ion-card>
+    <ion-grid>
+      <ion-row class="img-vehicle-container">
+        <ion-col>
+          <ion-img [src]="booking?.vehicle?.image?.storageUrl" />
+
+        </ion-col>
+        <ion-col>
+          <ion-item style="    font-size: 12px;
+            text-align: left;
+            margin-top: 25%;">
+            {{ booking?.vehicle?.description }}
+            {{ booking?.vehicle?.type }}
+          </ion-item>
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text>
+
+
+          </ion-text>
+          <p style="text-align: center;  font-weight: 600;" *ngIf="booking?.additionalDrivers?.length>0">Driver
+            details</p>
+          <!-- <div *ngFor="let driver of booking?.additionalDrivers">
+              <ion-text>
+                {{driver.title}} {{ driver.Name }} {{ driver.Lastname }}
+              </ion-text>
+            </div> -->
+          <!-- <p style="text-align: center; font-weight: 600;" *ngIf="booking?.passengers?.length>0">Passenger details</p>
+            <div *ngFor="let passenger of booking?.passengers">
+              <ion-text>
+                Name: {{passenger.title}} {{ passenger.firstName }} {{ passenger.lastName }}
+              </ion-text>
+            </div> -->
+
+
+          <p style="text-align: center;  font-weight: 600;" *ngIf="booking?.selectedAccessories?.length>0">Accessories
+          </p>
+          <hr />
+          <!-- <ion-text *ngFor="
+          let accessory of booking?.selectedAccessories">
+              <ion-item>
+                {{ accessory.option }}  X {{ accessory.qty}} : {{getExtraTotal(accessory)}}
+              </ion-item>
+            </ion-text> -->
+          <ion-row *ngFor="let accessory of booking?.selectedAccessories">
+            <ion-col>
+              <ion-text style="font-size: 10px;" class="ion-margin-top"> {{ accessory.qty}} {{ accessory.option }}:
+              </ion-text>
+            </ion-col>
+            <ion-col>
+              <ion-text style="font-size: 10px;" class="ion-margin-top">R{{getExtraTotal(accessory) }}</ion-text>
+            </ion-col>
+          </ion-row>
+          <!-- <ion-text *ngIf="booking.notes?.length>0">
+              <p>Notes</p>
+              <ion-item>
+                {{ booking?.note }}
+              </ion-item>
+            </ion-text> -->
+
+        </ion-col>
+
+      </ion-row>
+      <p style="text-align: center;  font-weight: 600;">Charges</p>
+      <ion-row *ngFor="let fee of booking?.vehicle?.feeBreakdown?.fee">
+        <ion-col>
+          <ion-text style="font-size: 10px;" class="ion-margin-top">{{fee.feeType}}: </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text style="font-size: 10px;" class="ion-margin-top">{{fee.price | currency : "R" }} </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text style="font-size: 10px;" class="ion-margin-top">Sub Total: </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text style="font-size: 10px;" class="ion-margin-top">{{subTotal | currency : "R" }} </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text class="ion-margin-top">Total: </ion-text>
+        </ion-col>
+        <ion-col>
+          <ion-text class="ion-margin-top">{{total | currency : "R" }} </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- <ion-text class="ion-margin-top" *ngFor="let fee of booking?.vehicle?.feeBreakdown?.fee">
+              <p>{{fee.feeType}}: {{ fee.price | currency : "R" }}</p>
+            </ion-text>
+            <ion-text>
+              <p>Sub Total: {{ booking.total | currency : "R" }}</p>
+            </ion-text>
+            <ion-text>
+              <p>Total: {{ booking.total | currency : "R" }}</p>
+            </ion-text> -->
+
+          <!-- <div class="ion-margin-top-10">
+              <ion-checkbox>Email quote</ion-checkbox>
+            </div> -->
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <!-- <ion-button expand="full" color="secondary" (click)="edit(booking)">Edit</ion-button>
+    <ion-button expand="full" color="secondary" (click)="back(booking)">Delete</ion-button> -->
+  <!-- </ng-container> -->
+  <ion-toolbar>
+    <ion-button expand="full" (click)="backToSummary()">Close summary</ion-button>
+    <!-- <ion-button *ngIf="quoteCreated" expand="full" (click)="viewQuotes()">View Quote</ion-button>
+    <ion-button *ngIf="quoteCreated" expand="full" (click)="continue()">Confirm & Pay</ion-button> -->
+  </ion-toolbar>
+</ion-content>
+<app-bottom-menu></app-bottom-menu>
+<!-- <ion-footer class="ion-padding">
+
+</ion-footer> -->

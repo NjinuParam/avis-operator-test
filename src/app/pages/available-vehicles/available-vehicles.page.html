@@ -1,0 +1,251 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+<ion-header [translucent]="false" style="background-color: white;">
+
+  <div style=""  color="#ffffff">
+    <div>
+      <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px; " name="arrow-back-circle-outline"></ion-icon>
+    </div>
+   
+  </div>
+  <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+<ion-buttons slot="end" style="float: right;">
+      <ion-button fill="clear" id="open-filter">
+        <!-- <ion-icon name="filter" slot="end"></ion-icon> -->
+        <img src="../../../assets/images/slider-filter.png" style="width: 50%;"/>
+        <!-- {{filterText}} -->
+      </ion-button>
+      <!-- <ion-button fill="clear" (click)="resetFilter()" *ngIf="filterText === 'Undo'">
+        <ion-icon name="filter" slot="end"></ion-icon>{{filterText}}
+      </ion-button>-->
+    </ion-buttons>
+    <div class="vehicle-text-header">
+      <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+      padding-bottom: 0px;">Select a vehicle</ion-text>
+      <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Select a vehicle to start your trip</small>
+      <!-- <ion-icon name="heart-outline"></ion-icon> -->
+    </div>
+    <ion-img [src]=""></ion-img>
+    
+  </div>
+
+</ion-header>
+
+  <ion-modal id="example-modal" #modal trigger="open-filter">
+    <ng-template>
+      <ion-searchbar animated="true" placeholder="Make/Model" [(ngModel)]="makeModel"></ion-searchbar>
+      <div class="wrapper ion-padding">
+        <div class="ion-text-center">
+          <ion-text>No. of Doors</ion-text>
+        </div>
+        <ion-radio-group value="" class="ion-margin-bottom" [(ngModel)]="doors">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-radio labelPlacement="end" value="2">2</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio labelPlacement="end" value="3">3</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio labelPlacement="end" value="4">4</ion-radio>
+              </ion-col>
+              <ion-col>
+                <ion-radio labelPlacement="end" value="5">5</ion-radio>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-radio-group>
+        <div class="ion-text-center">
+          <ion-text>Minimum no. of seats</ion-text>
+        </div>
+        <div style="text-align: center;">{{seats}}</div>
+        <ion-range aria-label="Range with ticks" [ticks]="true" [snaps]="true" [min]="1" [max]="10"
+          (ionChange)="onSeatsChange($event)"></ion-range>
+
+      </div>
+      <div class="btns">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button color="secondary" expand="full" (click)="resetFilter();">
+                Reset
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button color="secondary" expand="full" (click)="modal.dismiss();">
+                Cancel
+              </ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button expand="full" (click)="applyFilter(); modal.dismiss();">
+                Ok
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <!-- <ion-input name="noOfPassengers" type="number" (ionChange)="numberOfPassengersChanged($event)"
+      label="No. Of Passengers" [value]="noOfPassengers"></ion-input> -->
+
+  <ng-container *ngFor="let availableVehicles of availableVehicles; let i = index">
+    <div class="header-filter" style="    margin-top: 20px; padding:5%;     width: 100%;">
+      <ion-text style="font-weight: 500;">
+        {{availableVehicles.serviceTypeCode}}
+      </ion-text>
+      <ion-toggle
+      style="font-size: 13px;
+      font-weight: 500;"      
+      (ionChange)="toggleAvailable()" [checked]="availableOnly">Available vehicles ({{avail}})</ion-toggle>
+    </div>
+    <div></div>
+    <ion-list *ngIf="booking.bookingType.id !==1" style="padding-left: 0px; padding-right: 0px;">
+      <ion-item  lines="none">
+          <ion-select (ionChange)="numberOfPassengersChanged($event)" [value]="noOfPassengers"
+            aria-label="No. Of Adult Passengers" label="No. Of Adult Passengers" style="font-size: 11px;">
+            <ion-select-option [value]="i" style=" font-size: 12px;" *ngFor="let i of numberList">{{
+              i
+              }}</ion-select-option>
+  
+          </ion-select>
+        </ion-item>
+    </ion-list>
+  
+    <ng-container>
+      <div style="margin-left: 1%" class="col-md-12 row">
+        <div
+        style="
+        /* width: 50%;
+      float: left; */
+      font-size: 12px;"
+          class="col-md-6"
+          *ngFor="let extra of allExtras"
+        
+        >
+  
+        <ion-list>
+          <ion-item  lines="none">
+            <ion-select style="font-size: 10px;" [label]="extra.description"  (ionChange)="addRemoveOption($event, extra)">
+              <ion-select-option  value=0>No {{extra.description}}</ion-select-option>
+         
+                <ion-select-option [value]="i" style="font-size: 12px;"
+                *ngFor="let i of generateRange(extra)"
+                >{{ i }} x {{extra.description}} : {{getExtraTotal(i, extra) | currency: 'R':true:'1.0-0'}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+  
+        </div>
+      </div>
+    </ng-container>
+  
+    <div *ngIf="availableVehicles.isAvailable !== 'false'" >
+      <ng-container *ngIf="availableVehicles.vehicles.length > 0 else notfound">
+        <div *ngFor="let vehicle of filteredVehicles" (click)="viewVehicle(vehicle)">
+          <ng-container *ngIf="checkVehicleForPassengers(vehicle)">
+            <div class="ion-padding" style="box-shadow: 0px 6px 30px rgba(96, 96, 96, 0.1);
+            margin: 5%;
+            padding-left: 0px;
+            padding-bottom: 0px;
+            border-radius: 29px;
+            padding-right: 0px;
+            margin-left: 0px;
+            margin-right: 0px;"  *ngIf="vehicle.isAvailable === 'false'"
+              style="pointer-events: none; opacity: 0.4;">
+              <hr>
+              <ion-text>
+             {{vehicle.description}}  ({{vehicle.serviceType}}) 
+              </ion-text>
+              <ion-img [src]="vehicle?.image?.storageUrl" class="" alt=""></ion-img>
+              <!-- <div class="ion-text-center ion-padding" style="font-size: 0.6em;">
+                {{vehicle.doors}} Doors | {{vehicle.maxPassengers}} {{booking.bookingType === 1 ? 'Seats' :
+                'Passengers'}} | {{vehicle.suitCases}} Suit Cases | {{vehicle.transmissionType}} | {{vehicle.fuelType}}
+              </div> -->
+              <div class="ion-text-center">
+                <ion-text class="ion-padding">
+                  {{vehicle.fee.price | currency : 'R'}} Total
+                </ion-text>
+
+              </div>
+            </div>
+            <div class="ion-padding"  style="box-shadow: 0px 6px 30px rgba(96, 96, 96, 0.1);
+            margin: 5%;
+            padding-left: 0px;
+            padding-bottom: 0px;
+            border-radius: 30px;
+            padding-right: 0px;
+            margin-left: 0px;
+            margin-right: 0px;" *ngIf="vehicle.isAvailable === 'true'">
+              <!-- <hr> -->
+             
+              <ion-img [src]="vehicle?.image?.storageUrl" class="" alt=""></ion-img>
+              <div class=" ion-padding" >
+                <ion-text style="font-size: 0.8em; text-align: left;">
+                 MODEL:  {{vehicle.description.toUpperCase()}}<br/><br/>
+                </ion-text>
+                <ion-text *ngIf="booking.bookingType.id === 1" style="font-size: 0.8em; text-align: left;">
+                  FUEL TYPE:  {{vehicle.fuelType.toUpperCase()}}<br/><br/>
+                 </ion-text>
+                 <ion-text  *ngIf="booking.bookingType.id === 1"  style="font-size: 0.8em; text-align: left;">
+                TRANSMISSION:  {{vehicle.transmissionType.toUpperCase()}}<br/>
+                 </ion-text>
+                 <ion-text *ngIf="booking.bookingType.id !== 1"  style="font-size: 0.8em; text-align: left;">
+                 PASSENGERS:  {{vehicle.maxPassengers.toUpperCase()}}<br/><br/> 
+                 </ion-text>
+                 <ion-text *ngIf="booking.bookingType.id !== 1"style="font-size: 0.8em; text-align: left;">
+                  SUITCASES:  {{vehicle.suitCases.toUpperCase()}}<br/>
+                  </ion-text>
+                  <!-- <br/><br/> -->
+                <!-- {{vehicle.doors}} Doors | {{vehicle.maxPassengers}} {{booking.bookingType === 1 ? 'Seats' :
+                'Passengers'}} | {{vehicle.suitCases}} Suit Cases | {{vehicle.transmissionType}} | {{vehicle.fuelType}} -->
+                <div class="ion-text-center"  *ngIf="booking.bookingType.id === 1" style="margin-top: 7%; font-size: 14px;">
+                  {{vehicle.doors}} Doors |{{ showSeats(vehicle)}} Seats | {{vehicle.suitCases}} Suit Cases 
+                </div>
+                  
+              </div>
+              <br/>
+              <div>
+                <!-- <ion-text class="ion-padding"> -->
+                  <span style="margin-left: 11px; margin-left: 9%;">
+                  {{vehicle.fee.price | currency : 'R'}} 
+                </span><br/>
+                <small style="color:gray; margin-left: 25%;" >
+                  /total
+                </small>
+                  <!-- <br/>
+                  <small style="color:gray">Total </small> -->
+                  <br/>
+                  <button style="      
+                  margin-top: -11%;
+                  background-color: #D4002A;
+                  color: white;
+                  padding: 21px;
+                  padding-left: 40px;
+                  float: right;
+                  border-radius: 30px 0px;
+                  justify-content: right;
+                  text-align: right;
+                  padding-right: 40px;">
+                Book car
+              </button>
+              <br/> 
+                <!-- </ion-text> -->
+
+              </div>
+              
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+    <ng-template #notfound>
+      <p class="ion-text-center">No vehicles found in this category</p>
+    </ng-template>
+  </ng-container>
+
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

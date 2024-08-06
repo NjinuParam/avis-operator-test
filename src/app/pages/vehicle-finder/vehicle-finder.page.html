@@ -1,0 +1,223 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header [translucent]="false" style="background-color: white;">
+
+    <div style=""  color="#ffffff">
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Trip Details</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Enter your trip details</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img [src]=""></ion-img>
+    </div>
+  </ion-header>
+  <form [formGroup]="vehicleFinderForm" (ngSubmit)="doSearch()" novalidate>
+    <div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text class="ion-text-center">
+              <ion-grid>
+                <ion-row>
+                  <ion-col>
+                  <h5 style=" font-size: 14px;
+                  margin-bottom: 0px;
+                  font-weight: 500;
+                  font-weight: 600;">START DATE</h5>
+                </ion-col>
+                <ion-col>
+               
+                  <h5 style=" font-size: 14px;
+                  font-weight: 500;
+                  margin-bottom: 0px;
+                  font-weight: 600;">TIME</h5>
+               </ion-col>
+              </ion-row>
+              </ion-grid>
+            </ion-text>
+            <ion-datetime-button datetime="pickUpDate"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true" #startDateModal>
+              <ng-template>
+                <ion-datetime #datetime style="background-color: white; min-width: 250px;" minuteValues="0,5,10,15,20,25,30,35,40,45,50,55" locale="en-ZA" id="pickUpDate"
+                  (ionChange)="setDate($event,'start'); startDateModal.dismiss()" (ionCancel)="startDateModal.dismiss()"  [min]="startMinDate"
+                 [value]="getPickUpDate()">
+                  <ion-buttons slot="buttons" style="">
+                    <ion-button color="primary" style="background-color: lightgray;
+                    font-weight: 500;
+                    border-radius: 3px;
+                    font-size: 13px; color:black" (click)="datetime.cancel()">Cancel</ion-button>
+
+                    <ion-button color="light" style="background-color: #D4002A;
+                     font-weight: 500;
+                    border-radius: 3px;
+                    font-size: 13px; color:white" (click)="datetime.confirm()">Confirm</ion-button>
+                  </ion-buttons>
+                </ion-datetime>
+                <!-- <ion-datetime id="pickUpDate" (ionChange)="setDate($event,'start')" [min]="startMinDate"></ion-datetime> -->
+              </ng-template>
+            </ion-modal>
+          </ion-col>
+          <!-- <ion-col>
+            <ion-text class="ion-text-center">
+              <h5>END</h5>
+            </ion-text>
+            <ion-datetime-button datetime="dropOffDate"></ion-datetime-button>
+            <ion-modal [keepContentsMounted]="true">
+              <ng-template>
+                <ion-datetime id="dropOffDate" (ionChange)="setDate($event, 'end')" [min]="endMinDate"></ion-datetime>
+              </ng-template>
+            </ion-modal>
+          </ion-col> -->
+        </ion-row>
+      </ion-grid>
+      <ion-list class="ion-margin-top">
+        <ion-item lines="none">
+          <ion-row>
+            <ion-col>
+              <ion-checkbox style="border:none; font-size: 14px;   color: gray;" labelPlacement="end" [checked]="isAirportPickUp"
+                (ionChange)="enablePickUpAirport($event)">Airport Pick-up</ion-checkbox>
+              <ion-icon name="airplane-outline" slot="end"></ion-icon>
+            </ion-col>
+            <ion-col>
+
+            </ion-col>
+          </ion-row>
+
+        </ion-item>
+
+        <ion-item class="address-picker-item" lines="none" *ngIf="!isAirportPickUp">
+          <ion-icon name="search" slot="start" class="address-picker-icon search-icon"></ion-icon>
+          <app-address-autocomplete (setAddress)="setPickUp($event)" class="pickupAddress_" label="Pick up address"
+            [address]="googlePickUp"></app-address-autocomplete>
+          <ion-icon name="location-outline" class="address-picker-icon map-icon" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="isAirportPickUp">
+          
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+          <ion-select style="" formControlName="pickUpAirport" (ionChange)="pickupAirportChange($event)" [value]="pickupName"
+            aria-label="Pick-up Airport" placeholder="Pick-up Airport">
+            <ion-select-option [value]="airport.townBoundName" *ngFor="let airport of pickUpAirports">{{
+              airport.shortName
+              }}</ion-select-option>
+          </ion-select>
+          </ion-col>
+          <ion-col size="4">
+          <ion-input type="text" (ionChange)="isDisabled()" label="Flight no" labelPlacement="floating" style="font-size: 12px; color:gray" formControlName="pickupflightno"
+            errorText="Flight Number is required"></ion-input>
+            </ion-col>
+
+        </ion-row>
+        </ion-grid>
+        </ion-item>
+
+
+
+        <ion-grid>
+          <ion-row>
+            <ion-col *ngIf="booking.bookingType.id!==2">
+              <ion-text class="ion-text-center">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col>
+                    <h5 style=" 
+                    font-size: 14px;
+                    margin-bottom: 0px;
+                    font-weight: 500;
+                    font-weight: 600;">END DATE</h5>
+                  </ion-col>
+                  <ion-col>
+                 
+                    <h5 style=" font-size: 14px;
+                    font-weight: 500;
+                    margin-bottom: 0px;
+                    font-weight: 600;">TIME</h5>
+                 </ion-col>
+                </ion-row>
+                </ion-grid>
+              </ion-text>
+              <ion-datetime-button class="dtButton" datetime="dropOffDate"></ion-datetime-button>
+              <ion-modal [keepContentsMounted]="true" #endDateModal>
+                <ng-template>
+                  <ion-datetime #datetime2 id="dropOffDate"  style="background-color: white; min-width: 250px;"  minuteValues="0,5,10,15,20,25,30,35,40,45,50,55"
+                    locale="en-ZA" (ionChange)="setDate($event, 'end'); endDateModal.dismiss()" (ionCancel)="endDateModal.dismiss()" [min]="endMinDate"
+                    [max]="maxEndDate" [value]="getDropOffDate()">
+                      <ion-buttons slot="buttons" style="">
+                    <ion-button color="primary" style="background-color: lightgray;
+                    font-weight: 500;
+                    border-radius: 3px;
+                    font-size: 13px; color:black"(click)="datetime2.cancel()">Cancel</ion-button>
+
+                    <ion-button color="light" style="background-color: #D4002A;
+                     font-weight: 500;
+                    border-radius: 3px;
+                    font-size: 13px; color:white" (click)="datetime2.confirm()">Confirm</ion-button>
+                  </ion-buttons>
+                  </ion-datetime>
+                </ng-template>
+              </ion-modal>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      
+        <ion-item lines="none">
+          <ion-row>
+            <ion-col>
+              
+              <ion-checkbox style="border:none; font-size: 14px;   color: gray;"  lines="none" labelPlacement="end" [checked]="isAirportDropOff"
+                (ionChange)="enableDropOffAirport($event)">Airport Drop Off</ion-checkbox>
+              <ion-icon name="airplane-outline" slot="end"></ion-icon>
+            </ion-col>
+            <ion-col>
+
+            </ion-col>
+          </ion-row>
+
+        </ion-item>
+
+
+        <ion-item class="address-picker-item" lines="none" *ngIf="!isAirportDropOff">
+          <ion-icon name="search" class="address-picker-icon search-icon" slot="start"></ion-icon>
+          <app-address-autocomplete (setAddress)="setDropOff($event)" label="Drop off address" [address]="googleDropOff"
+            [latLng]="dropOffLatLng"></app-address-autocomplete>
+          <ion-icon name="location-outline" class="address-picker-icon map-icon" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="isAirportDropOff">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="8">
+          <ion-select formControlName="dropOffAirport" (ionChange)="dropOffAirportChange($event)" [value]="dropOffName"
+            aria-label="Drop Off Airport" placeholder="Drop Off Airport">
+            <ion-select-option [value]="airport.townBoundName" *ngFor="let airport of dropOffAirports">{{
+              airport.shortName
+              }}</ion-select-option>
+
+          </ion-select>
+              </ion-col>
+              <ion-col size="4">
+          <ion-input type="text" label="Flight no"  (ionChange)="isDisabled()" style="font-size: 12px; color:gray" labelPlacement="floating" formControlName="dropoffflightno"
+            errorText="Flight Number is required"></ion-input>
+            </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+      <ion-button [disabled]="isDisabled()" expand="block" color="dark" style="margin-top: 10%;" class="mt-2 ion-margin-top-20 btn-primary"  (click)="doSearch()">
+        Next
+         </ion-button>
+
+      <!-- <ion-button expand="full"  color="dark"  (click)="doSearch()">Search Vehicles</ion-button> -->
+    </div>
+  </form>
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

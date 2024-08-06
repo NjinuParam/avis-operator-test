@@ -1,0 +1,34 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header  [translucent]="false" style="background-color: white;">
+
+    <div style="" >
+      <div>
+        <ion-icon (click)="onBack ()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <p style="font-size: 1.2em; margin-top: 0px; margin-bottom: 0px; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Add Notes</p>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Add Notes To Avis</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img  [src]=""></ion-img>
+    </div>
+  
+  </ion-header>
+
+
+  <form [formGroup]="additionalNote" (ngSubmit)="addNote()">
+    <ion-textarea label="Notes to Avis" labelPlacement="floating" fill="solid" placeholder="Start typing.." class="note"
+      rows="15" formControlName="note"></ion-textarea>
+ <ion-button expand="block" type="submit" color="danger" class=" btn-primary add_note_submit" style="border-radius: 32px;" >Continue</ion-button>
+ <ion-button (click)="onBack()" expand="block"  >Back</ion-button>
+  </form>
+</ion-content>
+
+
+<app-bottom-menu></app-bottom-menu>

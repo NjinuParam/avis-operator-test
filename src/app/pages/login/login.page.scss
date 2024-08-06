@@ -1,0 +1,39 @@
+.social-img {
+  width: 16px;
+  margin: 5px;
+}
+.social-images-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.suffix-icon {
+  position: absolute;
+  right: 20px;
+  z-index: 1000;
+  bottom: -2px;
+}
+.terms {
+  font-size: 14px;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.rememberme{
+  // margin-right: 220px !important;
+}
+
+.header{
+  font-size: 2.8em;
+}
+
+.toolbar-content {
+    flex: 1 1 0%;
+    order: 3;
+    min-width: 0px;
+    max-width: 100%;
+    text-align: center !important;
+}
+.inner-scroll{
+  margin-top: -50px !important;
+}

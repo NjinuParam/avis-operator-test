@@ -1,0 +1,55 @@
+ion-toolbar{
+  color: black;
+}
+
+ion-radio {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+
+ion-card{
+  border-radius: 15px;
+  color: black;
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+thinText{
+  font-weight: lighter;
+}
+
+ion-card-title{
+  color: white;
+}
+
+ion-toolbar{
+  border-bottom-color: var(--ion-color-primary);
+}
+
+:host(.button-solid.ion-color) .button-native {
+  border-radius: 3px !important;
+}
+
+// ::ng-deep .native-wrapper {
+//   border: 0px solid #000 !important;
+//   border-radius: 3px;
+// }
+
+ion-grid,
+ion-row,
+ion-col {
+  padding: 0;
+}
+.radio-wrapper {
+  margin-left: 15px !important;
+}
+.past-bookings {
+}

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<resources>
+    <string name="app_name">AVIS LUXURY CARS CHAUFFEUR DRIVE</string>
+    <string name="title_activity_main">AVIS LUXURY CARS CHAUFFEUR DRIVE</string>
+    <string name="package_name">co.za.avis.cars.luxury.customer</string>
+    <string name="custom_url_scheme">co.za.avis.cars.luxury.customer</string>
+     <string
+    name="server_client_id"
+  >932067447152-58prqbdo5pegmjdg89oira0gkbi61ol1.apps.googleusercontent.com</string>
+   <string name="fb_app_id">930015098294147</string>
+    <string name="fb_app_name">AVIS-TEST - Test2</string>
+    <string
+    name="facebook_client_token"
+  >1c9aa0c7947d0e38b8d454a8e30f3736</string>
+</resources>

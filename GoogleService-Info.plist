@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>932067447152-k37pb0boko24r03hm43mmit841homj9s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.932067447152-k37pb0boko24r03hm43mmit841homj9s</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>932067447152-2v4do9ihl36lmvisludq00od0rfflcht.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAilF8AEKUCyX8wRIKaRnwQ0kILQ39ZDKo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>932067447152</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>co.za.avis.cars.luxury.customer</string>
+	<key>PROJECT_ID</key>
+	<string>avis-project-81bba</string>
+	<key>STORAGE_BUCKET</key>
+	<string>avis-project-81bba.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:932067447152:ios:7b02d19fa3e25e5b16bfb5</string>
+	<key>DATABASE_URL</key>
+	<string>https://avis-project-81bba-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>playground</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-button expand="full" (click)="gotTo('login')">Login</ion-button>
+  <ion-button expand="full" (click)="gotTo('forgot-password')">Forgot Password</ion-button>
+  <ion-button expand="full" (click)="gotTo('reset-password')">Reset Password</ion-button>
+  <ion-button expand="full" (click)="gotTo('profile')">Profile</ion-button>
+  <ion-button expand="full" (click)="gotTo('register')">Register</ion-button>
+  <ion-button expand="full" (click)="gotTo('bookings')">Bookings</ion-button>
+  <ion-button expand="full" (click)="gotTo('otp')">OTP</ion-button>
+  <ion-button expand="full" (click)="gotTo('conditions')">Terms and Conditions</ion-button>
+  <ion-button expand="full" (click)="gotTo('add-note')">Additional Note</ion-button>
+  <ion-button expand="full" (click)="gotTo('credit-card')">Payment</ion-button>
+  <ion-button expand="full" (click)="gotTo('available-booking-types')">Available Booking Types</ion-button>
+  <ion-button expand="full" (click)="gotTo('additional-drivers')">Additional Drivers</ion-button>
+  <ion-button expand="full" (click)="gotTo('main-passenger')">Main Passenger</ion-button>
+  <ion-button expand="full" (click)="gotTo('vehicle-finder')">Find a Vehicle</ion-button>
+  <ion-button expand="full" (click)="gotTo('emergency')">Emergency</ion-button>
+  <ion-button expand="full" (click)="gotTo('vehicle-tracker')">Track Driver</ion-button>
+  <ion-button expand="full" (click)="gotTo('generate-quote')">Generate Quote</ion-button>
+  <app-bottom-menu></app-bottom-menu>
+</ion-content>

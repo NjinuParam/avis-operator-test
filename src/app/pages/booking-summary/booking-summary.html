@@ -1,0 +1,192 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header [translucent]="false" style="background-color: white;">
+    <div style=""  color="#ffffff">
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+    </div>
+    <ion-toolbar style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Reservation Summary</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Reservation number: <b>{{bookingNumber}}</b></small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img [src]=""></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+   <ion-card>
+      <ion-card-header>
+        <ion-card-title style="font-size: 15px;
+        text-align: center;
+        color: white;
+        font-weight: 500;">RESERVATION SUMMARY</ion-card-title>
+      </ion-card-header>
+      <ng-container *ngFor="let leg of booking?.getBookingResult?.legs?.leg; let i = index">
+ 
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-text>
+              <p>Leg #{{leg.legNumber}}<br />  <br /> 
+              <small>{{leg?.vehicleTypeDescription}}</small>   <br /> 
+              <br /> 
+               <small> {{leg.serviceTypeDescription}}</small></p>
+            </ion-text>
+
+            <p *ngIf="leg?.remarks.length>0">Notes</p>
+            <ion-text>
+              <p><small>{{leg?.remarks}}</small></p>
+            </ion-text>
+
+          </ion-col>
+          <ion-col class="img-vehicle-container">
+            <ion-img [src]="leg?.vehicleImage?.storageUrl" />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: center;">
+            <h3 style="font-size: 12px;
+            font-weight: 600;">START </h3>
+           <small>{{leg.collectionDateTime | date : 'dd MMM yyyy HH:mm'}}</small> 
+            <div>
+              <small>{{leg.collectionAddress.name}}</small>
+            </div>
+          </ion-col>
+          <ion-col style="text-align: center;">
+            <h3 style="font-size: 12px;
+            font-weight: 600;">END</h3>
+            <small>{{leg.destinationDateTime | date : 'dd MMM yyyy HH:mm'}}</small> 
+            <div>
+             <small>{{leg.destinationAddress.name}}</small> 
+            </div>
+          </ion-col>
+        </ion-row>
+        <ng-container *ngIf="leg?.additionalDrivers?.length > 0">
+          <p style="font-size: 12px;
+          font-weight: 600; text-align: left;">ADDITIONAL DRIVERS</p>
+          <ion-row *ngFor="let driver of leg.additionalDrivers">
+            <ion-col style="text-align: center;">
+
+              <small> {{driver.title}} {{driver.name}} {{driver.surname}}</small>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        <ng-container
+          *ngIf="leg.passengerDetails && leg.passengerDetails.passengers && leg.passengerDetails.passengers.length > 0 && leg.serviceTypeDescription !== 'AVIS LUXURY CARS'">
+          <p style="font-size: 12px;
+          font-weight: 600; text-align: left;">PASSENGERS</p>
+          <ion-row *ngFor="let passenger of leg.passengerDetails.passengers">
+            <ion-col style="text-align: center;">
+             <small> {{passenger.title}} {{passenger.name}} {{passenger.surname}} </small>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+        <ion-row>
+          <ion-col>
+            <p style="font-size: 12px;
+            font-weight: 600; text-align: left; margin-top: 5%; margin-bottom: 5%;" *ngIf="leg?.equipment?.equipment">CHARGES</p>
+            <table style="width: 100%;">
+              <tr style="text-align: left;">
+                <th style="font-size: 12px;
+                font-weight: 600; ">Description</th>
+                <th  style="font-size: 12px;
+                font-weight: 600;">Qty</th>
+                <th  style="font-size: 12px;
+                font-weight: 600; ">Charge</th>
+                <th  style="font-size: 12px;
+                font-weight: 600; ">Total</th>
+              </tr>
+              <tr *ngFor="let accessory of  leg?.equipment?.equipment" style="font-size: 10px;">
+                <td>
+                  {{ accessory.description | titlecase }}
+                </td>
+                <td style="text-align: center;">
+                  {{accessory.quantity}}
+                </td>
+                <td>
+                  {{ accessory.amount | currency: 'R':true:'1.0-0'}}
+                </td>
+                <td>
+                  {{getExtraTotal(accessory) | currency: 'R':true:'1.0-0'}}
+                </td>
+              </tr>
+              <tr *ngFor="let fee of booking?.vehicle?.feeBreakdown?.fee">
+
+                <td>
+                  <ion-text class="ion-margin-top">{{fee.feeType}}: </ion-text>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  <ion-text class="ion-margin-top">{{fee.price | currency : "R":true:'1.0-0' }} </ion-text>
+                </td>
+                <td>
+                  <ion-text class="ion-margin-top">{{fee.price | currency : "R":true:'1.0-0' }} </ion-text>
+                </td>
+              </tr>
+              <tr style="text-align: left; margin-top: 5%;">
+                <th colspan="3">
+                  <ion-text class="ion-margin-top">Total </ion-text>
+                </th>
+                <th>
+                  <ion-text class="ion-margin-top">{{leg?.totalRateAmount | currency : "R":true:'1.0-0' }}
+                  </ion-text>
+                </th>
+              </tr>
+            </table>
+            <!-- <ion-text *ngFor="let accessory of leg?.equipment?.equipment">
+
+              <p>
+                {{accessory.quantity}} X {{accessory.description}} @ {{accessory.amount | currency : 'R'}}
+              </p>
+            </ion-text> -->
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row>
+          <ion-col>
+            <ion-text>
+              <p>Total | {{leg?.totalRateAmount | currency : 'R'}}</p>
+            </ion-text>
+          </ion-col>
+          <ion-col></ion-col>
+        </ion-row> -->
+      </ion-grid>
+      <ion-toolbar>
+        <ion-grid *ngIf="editable!=false">
+          <!-- <ion-row>
+            
+              <ion-button color="danger" style="width: 100%;" expand="block" (click)="track(i)">Track</ion-button>
+            
+          </ion-row> -->
+          <ion-row>
+            
+              <ion-button color="dark"  style="width: 100%;" expand="block" (click)="edit(i)">Edit</ion-button>
+            
+          </ion-row>
+          
+        </ion-grid>
+      </ion-toolbar>
+    </ng-container>
+    </ion-card>
+  
+  
+  <!-- <ion-toolbar>
+    <ion-button  (click)="back()" color="dark"  expand="block" *ngIf="!loading">Done</ion-button>
+  </ion-toolbar> -->
+</ion-content>
+<app-bottom-menu></app-bottom-menu>
+<!-- <ion-content [fullscreen]="true" class="ion-padding">
+  <div class="center">
+    Quote# {{quoteNumber}}
+  </div>
+  <ng-container *ngFor="let leg of quote?.getQuoteResult.legs.leg">
+    <div class="center">
+      Vehicle details: {{leg.vehicleTypeDescription}}
+    </div>
+  </ng-container>
+</ion-content> -->

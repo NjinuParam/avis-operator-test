@@ -1,0 +1,83 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header  [translucent]="false" style="background-color: white;">
+
+    <div style="" >
+      <div>
+        <ion-icon (click)="back()"  style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <ng-container >
+    <div  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Enquiry</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Log an enquiry</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img  [src]=""></ion-img>
+    </div>
+
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+     
+      <!-- <ion-img [src]="booking?.vehicle?.image?.storageUrl" /> -->
+    </div>
+
+    </ng-container>
+  </ion-header>
+
+  <form [formGroup]="form" (ngSubmit)="logEnquiry()">
+    <div>
+      <ion-list class="ion-margin-top">
+        <ion-item style="width: 91%;
+        border: 1px solid #b3b3b3;
+        margin-left: 0%;
+        margin-right: 0%;
+        border-radius: 4px;
+        height: 45px;
+        /* text-indent: 23px; */
+        color: gray;
+        margin-left: 15px;">
+          <div style="    width: 100%;"><ion-select aria-label="Title" formControlName="stageNumber" placeholder="Select the stage number"
+              
+              >
+              <ion-select-option *ngFor="let leg of legs" [value]="leg">{{ leg }}</ion-select-option>
+            </ion-select></div>
+          <ion-note><i *ngIf="!form.valid && !form.value.stageNumber && form.touched"
+              style="color:red; font-size: x-small;">Stage number is
+              required</i></ion-note>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="Reservation Number"  fill="outline"  labelPlacement="floating" formControlName="bookingNumber"
+            [disabled]="true" errorText="Reservation Number is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="First Name"  fill="outline"  labelPlacement="floating" formControlName="complainantName"
+            errorText="First Name is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text"  fill="outline"  placeholder="Last Name" labelPlacement="floating" formControlName="complainantSurname"
+            errorText="Last Name is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text"  fill="outline"  placeholder="Contact No." labelPlacement="floating" formControlName="complainantMobile"
+            errorText="Contact No. is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text"  fill="outline"  placeholder="Email" labelPlacement="floating" formControlName="complainantEmail"
+            errorText="Email is required"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [counter]="true"
+          maxlength="218" label="Enquiry detail"  placeholder="Enquiry detail" label-placement="floating" rows="8" formControlName="complaint"
+            errorText="Enquiry detail is required"></ion-textarea>
+        </ion-item>
+        <ion-button expand="block" class="ion-margin-top" type="submit">
+          Submit enquiry
+        </ion-button>
+      </ion-list>
+    </div>
+  </form>
+</ion-content>

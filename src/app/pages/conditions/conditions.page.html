@@ -1,0 +1,103 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Terms and Conditions</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+
+  <!-- <ion-img [src]="booking?.vehicle?.image?.storageUrl" /> -->
+
+<ion-content [fullscreen]="true" style="">
+  <ion-header  [translucent]="false" style="background-color: white;">
+    <div style="" >
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <ng-container >
+      <div  style="border-bottom: 5px solid #D4002A;"  >
+  
+      <div class="vehicle-text-header">
+        <p style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px; margin-top: 0px; margin-bottom: 0px;">Terms and Conditions</p>
+           <small style="color: lightgrey; padding-bottom: 10px; margin-top: 0px; padding-left: 5%;">Please review the terms and conditions</small>
+      
+        <!-- <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Generate your quote</small> -->
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img  [src]=""></ion-img>
+   </div>
+    </ng-container>
+    <!-- <ion-toolbar style="border-bottom: 5px solid #D4002A;"  color="#ffffff"></ion-toolbar> -->
+  </ion-header>
+  
+       
+  <ion-accordion-group style="padding:10px">
+    <ion-accordion value="info" style="margin-top: 5%;   border: 1px solid rgba(96,96,96,0.1);
+    border-radius: 3px;
+    ">
+      <ion-item slot="header">
+        <ion-label style="font-size: 14px;">Important Information and Cancellation</ion-label>
+      </ion-item>
+      <div slot="content">
+        <ion-card>
+          <ion-card-content>
+            <div class="d-flex justify-content-between p-3" *ngFor="let term of cleanTerms">
+              <div style="font-size: 12px;" innerHTML="{{ term }}">{{ term }}</div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="terms" style=" margin-top: 5%; border: 1px solid rgba(96,96,96,0.1);
+    border-radius: 3px;
+    ">
+      <ion-item slot="header">
+        <ion-label style="font-size: 14px;">Terms and Conditions</ion-label>
+      </ion-item>
+      <div slot="content">
+        <ion-card>
+          <!-- <ion-card-header>
+            <ion-card-title class="text-center w100 p-2 header-title border-bottom">Terms and
+              Conditions</ion-card-title>
+          </ion-card-header> -->
+
+          <ion-card-content>
+            <div style="font-size: 12px;" class="d-flex justify-content-between p-3">
+              <a href="https://www.avis.co.za/chauffeur-driven-services/terms-and-conditions">Full terms and conditions:
+                Chauffeur Driven Services</a>
+            </div>
+            <div style="font-size: 12px;" class="d-flex justify-content-between p-3">
+              <a href="https://www.avis.co.za/luxury-car-hire/terms-and-conditions">Full terms and conditions: Luxury
+                Car
+                Hire</a>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+ <div class="ion-padding">
+      <ion-checkbox label-placement="end" style="font-size: 15px; text-decoration: underline;" alignment="start" (ionChange)="termsAccpeted($event)">I agree to
+        the terms and conditions</ion-checkbox>
+    </div>
+
+</ion-content>
+<div>
+  <!-- <ion-toolbar> -->
+ 
+   
+  <ion-toolbar style="background-color: white;">
+  
+    <ion-button expand="full" color="dark" (click)="back()" expand="block">
+      Cancel </ion-button>
+    <ion-button  expand="full" [disabled]="termsAccepted==false"  (click)="finish()"  color="danger"  expand="block">Next
+    </ion-button>
+  </ion-toolbar>
+</div>
+<app-bottom-menu></app-bottom-menu>

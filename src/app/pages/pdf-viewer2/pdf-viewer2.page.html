@@ -1,0 +1,39 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>View PDF</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<ion-header [translucent]="false" style="background-color: white;">
+  <div style=""  color="#ffffff">
+    <div>
+      <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+    </div>
+  </div>
+   
+  <ion-toolbar color="#ffffff" style="border-bottom: 5px solid #D4002A;" >
+
+    <div class="vehicle-text-header">
+      <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+      padding-bottom: 0px;">View PDF</ion-text>
+      <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Reservation number: {{bookingId}}</small>
+      <!-- <ion-icon name="heart-outline"></ion-icon> -->
+    </div>
+    <!-- <ion-img [src]=""></ion-img> -->
+    <!-- <ion-row>
+      <ion-col class="carimageholder" size="12">
+        <ion-img class="carimage"
+          [src]="'../../../assets/images/bookings_header.jpg'"></ion-img>
+      </ion-col>
+    </ion-row>   -->
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <pdf-viewer
+    [src]="pdfSrc"
+    [render-text]="true"
+    [original-size]="false"
+    style="width: 99%; height: 500px"
+  ></pdf-viewer>
+</ion-content>

@@ -1,0 +1,77 @@
+
+@import './_mixins';
+@mixin logoAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.5);
+  }
+}
+
+body {
+  background-color: black;
+}
+
+
+  :host(.button-solid.ion-color) .button-native {
+    background-color: white !important;
+  }
+
+  ion-content::part(background){
+    background-image: url("./../../../assets/images/background-open.png") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: 45%;
+    // background-position-y: -;
+    
+    }
+
+    .loginButton1{
+      width: 90%;
+      padding: 15px;
+      font-weight: 500;
+      color: white;
+      background-color: #D4002A;
+      margin-top: 2%;
+      margin-left: 5%;
+      font-size: 15px;
+      /* margin-right: 5%; */
+      border-radius: 12px;
+    }
+.loginButton2{
+  width: 90%;
+  padding: 15px;
+  font-weight: 500;
+  color: black;
+  background-color: white;
+  font-size: 15px;
+  margin-top: 2%;
+  margin-left: 5%;
+  /* margin-right: 5%; */
+  border-radius: 12px;
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.small-logo {
+    max-width: 50%;
+
+    .logo {
+      width: 100%;
+    }
+  }
+  
+  &.animate-logo {
+    .logo {
+      @include logoAnimation;
+    }
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+    transition: width 0.5s ease-in-out;
+  }
+}

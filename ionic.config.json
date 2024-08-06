@@ -1,0 +1,7 @@
+{
+  "name": "AVIS LUXURY CARS CHAUFFEUR DRIVE",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

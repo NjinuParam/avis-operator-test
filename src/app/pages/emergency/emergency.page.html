@@ -1,0 +1,52 @@
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  
+  <ion-header  [translucent]="false" style="background-color: white;">
+
+ 
+    <div style="" >
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <ng-container >
+    <div  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Contact AVIS</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Agents are available 24/7</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img  [src]=""></ion-img>
+    </div>
+
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+     
+      <!-- <ion-img [src]="booking?.vehicle?.image?.storageUrl" /> -->
+    </div>
+
+    </ng-container>
+  </ion-header>
+
+  <div style="text-align: center;">
+    <a>
+    <ion-button shape="round" style="    margin-top: 15%;
+    height: 70px;
+    margin-bottom: 5%; " color="danger" id="present-alert" full> <ion-icon
+        name="alert-outline"></ion-icon></ion-button>
+  </a>
+
+  <h1>Support Numbers</h1>
+  <h5>CHAUFFEUR DRIVE<br /><ion-icon name="call-outline"></ion-icon><a
+      [href]="'tel:' + contactNumbers?.carlineACD">{{contactNumbers?.carlineACD}}</a></h5>
+      <br/><br/>
+  <h5>AVIS LUXURY CARS<br /><ion-icon name="call-outline"></ion-icon> <a
+      [href]="'tel:' + contactNumbers?.carlineAUX">{{contactNumbers?.carlineAUX}}</a></h5>
+
+  </div>
+  
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

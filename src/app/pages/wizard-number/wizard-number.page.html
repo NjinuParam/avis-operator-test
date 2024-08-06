@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-margin-top-50">
+    <ion-grid class="ion-margin-top">
+      <ion-row>
+        <ion-col>
+          <ion-input type="number" inputmode="numeric" label="Enter Wizard / Customer Number if Known"
+            labelPlacement="floating"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-button expand="full" class="ion-margin-top-50" type="submit" (click)="onContinue()">
+    Continue
+  </ion-button>
+</ion-content>
+\

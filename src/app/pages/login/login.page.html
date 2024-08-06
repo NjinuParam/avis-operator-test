@@ -1,0 +1,72 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+     <ion-buttons slot="start">
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="toolbarheader">
+   
+  </ion-toolbar>
+</ion-header> -->
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1 class="toolbar-content header" style="font-weight: 600; font-size:2em; font-style:normal;">Welcome back!<br></h1>
+  <p class="toolbar-content" style="font-weight: 600;
+  font-size: 14px;     padding: 0px 15px;">Enter your email address and password. </p>
+  <form [formGroup]="loginForm" (ngSubmit)="loginWithEmailPassword()" novalidate>
+    <div>
+      <ion-list >
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email"  fill="outline" expand="block" placeholder="Enter email address/username" labelPlacement="floating" formControlName="username"
+            errorText="A valid email is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input [type]="passwordInputYype" fill="outline" autocomplete="new-password" placeholder="Enter password" labelPlacement="floating" formControlName="password"
+            errorText="Password is required"></ion-input>
+          <ion-icon name="eye" slot="end" (click)="showPassword()" *ngIf="!_showPassword"
+            class="suffix-icon"></ion-icon>
+          <ion-icon name="eye-off-outline" slot="end" (click)="showPassword()" *ngIf="_showPassword"
+            class="suffix-icon"></ion-icon>
+        </ion-item>
+        <ion-button expand="block" color="danger" class="ion-margin-top-50 btn-primary" type="submit">
+          Sign in
+        </ion-button>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-checkbox style="width: 15%;" formControlName="rememberMe"></ion-checkbox><span class="rememberme">Remember Me</span>
+        </ion-item>
+
+        <div class="ion-margin-top-50">
+          <ion-label class="" (click)="forgotPassword()">Forgot your password? <span class="paragraph-red underline" style="color: #D4002A  !important;padding-left: 5px !important;"><b>Reset Password</b></span></ion-label>
+        </div>
+      </ion-list>
+    </div>
+  </form> 
+  <div class="ion-margin-top-50">
+    <ion-text color="primary">
+      <hr>
+    </ion-text>
+  </div>
+  <div>
+    <ion-button expand="block" (click)="register()" color="dark" style="margin-top: 10%;" class="mt-2 ion-margin-top-20 btn-primary" type="submit">
+     Continue with Email 
+      </ion-button>
+      <ion-button (click)="loginWithGoogle()"  expand="block" color="outline" class="ion-margin-top-50" type="submit">
+        <ion-img class="social-img" src="../../../assets/images/google.png" />Continue with Google 
+        </ion-button>
+  <ion-button (click)="loginWithFacebook()" expand="block"   color="clear solid" class="ion-margin-top-50" type="submit">
+    <ion-img  class="social-img" src="../../../assets/images/facebook.png" />Continue with Facebook 
+    </ion-button>
+ 
+  </div>
+ 
+  <div style="margin-top:5%" class="terms">By Logging In You Are Agreeing To The Following <br><span 
+    style="color:#D4002A  !important;padding-left: 5px !important;"
+    (click)="termsAndConditions()"
+   >Terms and 
+    Conditions</span></div>
+  
+    <div class="ion-margin-top-50">
+      Don't have an account?<ion-label class="underline"  (click)="register()"><span class="paragraph-red" style="color:#D4002A  !important;padding-left: 5px !important;"><b>Sign Up</b></span></ion-label> here
+     </div><br/><br/>
+ 
+</ion-content>

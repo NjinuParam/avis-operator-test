@@ -1,0 +1,47 @@
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.driver-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ::ng-deep .native-wrapper {
+//   border: 1px solid #000 !important;
+//   border-radius:12px;
+// }
+
+ion-button ::part(native){
+  border-radius: 3px !important;
+}
+
+.alert-radio-label.sc-ion-alert-md{
+font-size: 12px;
+}
+
+::ng-deep .alert-radio-label.sc-ion-alert-md{
+ 
+    font-size: 12px;
+    
+}
+ion-item ::part(native) .item-inner{
+  border-radius: 3px !important;
+  border: 1px solid #b3b3b3;
+  border-radius: 10px;
+  padding: 0px;
+  margin: 0px;
+  max-height: 45px;
+  padding-top: 11px;
+}
+
+::ng-deep .item-inner{
+  border: 1px solid #b3b3b3;
+  border-radius: 10px;
+  padding: 0px;
+  margin: 0px;
+  max-height: 45px;
+  padding-top: 11px;
+}

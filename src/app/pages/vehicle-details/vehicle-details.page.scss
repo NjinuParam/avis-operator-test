@@ -1,0 +1,31 @@
+.vehicle-text-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+}
+.extra {
+  width: 100%;
+  float: left;
+  margin-bottom: 15px;  
+}
+
+ion-button::part(native) {
+  --border-radius: 3px !important;
+  border-radius: 3px !important;
+}
+
+::ng-deep .alert-radio-label.sc-ion-alert-md{
+  font-size: 12px !important;
+}
+.alert-radio-label.sc-ion-alert-md{
+  font-size: 12px !important;
+}
+
+::ng-deep .alert-radio-label sc-ion-alert-ios{
+  font-size: 12px !important;
+}
+
+.alert-radio-label sc-ion-alert-ios{
+  font-size: 12px !important;
+}

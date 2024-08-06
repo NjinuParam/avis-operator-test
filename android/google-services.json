@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "932067447152",
+    "firebase_url": "https://avis-project-81bba-default-rtdb.firebaseio.com",
+    "project_id": "avis-project-81bba",
+    "storage_bucket": "avis-project-81bba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932067447152:android:68aa922a8b381ec516bfb5",
+        "android_client_info": {
+          "package_name": "co.za.avis.cars.luxury.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932067447152-2v4do9ihl36lmvisludq00od0rfflcht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.za.avis.cars.luxury.customer",
+            "certificate_hash": "db4f3b2a68b32773b015f34aed01e34b6ef85048"
+          }
+        },
+        {
+          "client_id": "932067447152-58prqbdo5pegmjdg89oira0gkbi61ol1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOeIj1taTFBHTcH2F8P4foh4FyM25PGL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932067447152-1rh2n7cug696hia5skvn5i32tug53hvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

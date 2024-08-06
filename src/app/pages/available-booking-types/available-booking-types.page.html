@@ -1,0 +1,109 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header [translucent]="false" style="background-color: white;">
+    <div style=""  color="#ffffff">
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+      <ion-buttons slot="start">
+        <!-- <ion-button>
+          <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+        </ion-button> -->
+        <ion-back-button>
+        </ion-back-button>
+      </ion-buttons>
+      <div class="vehicle-text-header">
+        <ion-text style="font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Start Your Reservation</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Select Your Service Type</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img [src]=""></ion-img>
+    </div>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style=" font-size: 15px; text-align: center;">START A NEW RESERVATION</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- <form [formGroup]="newBookingForm"> -->
+      <ion-radio-group [value]="selectedBookingType?.id" (ionChange)="selectedBookTypeChange($event)">
+        <ion-radio style="margin-left: 15px!important;" [value]="bookingType.id" labelPlacement="end"
+          *ngFor="let bookingType of bookingTypes">
+        <b>{{bookingType.name}}</b><br />
+         <small style="color:gray"> {{bookingType.description}}</small></ion-radio><br />
+      </ion-radio-group>
+      <!-- </form> -->
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="ion-margin-top">
+    <ion-card-header>
+      <ion-card-title style=" font-size: 15px; text-align: center;">SELECT PREVIOUS RESERVATION</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div style="text-align: center;" *ngIf="pastBookings.length === 0">
+        <ion-text class="ion-margin-top-5" style="font-size: 12px; text-align: center; margin-top:10px;">No previous
+          reservations.</ion-text>
+      </div>
+      <div>
+        <form [formGroup]="pastBookingForm">
+          <ion-radio-group formControlName="pastBookingList">
+            <ng-container *ngFor="let booking of pastBookings">
+    
+
+              <ion-radio class=" ion-padding past-bookings" labelPlacement="end"
+                *ngFor="let leg of booking.legs; let i = index"
+                (click)="pastBookingSelected($event, booking.bookingId, i)">
+                <div style="    font-size: 12px;"> <b> {{leg.serviceTypeDescription}}</b></div>
+                <ion-grid>
+                  <!-- <ion-row>
+                    <ion-col style="text-align: center;"><b>START</b></ion-col>
+                  </ion-row> -->
+                  <ion-row>
+                    <!-- <ion-col style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;"> -->
+                     <small style="font-size: 10px;
+                     width: 200px;
+                     overflow: hidden;
+                     text-overflow: ellipsis;"> Start: {{leg.collectionAddress.replace(',,','')}} </small> <br/><small  style="font-size: 10px;
+                     width: 200px;
+                     overflow: hidden;
+                     text-overflow: ellipsis;"> End: {{leg.destinationAddress.replace(',,','')}}</small>
+                    <!-- </ion-col> -->
+                  </ion-row>
+                  <!-- <ion-row>
+                    <ion-col style="text-align: center;"><b>END</b></ion-col>
+                  </ion-row> -->
+                  <!-- <ion-row>
+                    <ion-col style="text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;">
+                      {{leg.destinationAddress}}<br />
+                    </ion-col>
+                  </ion-row> -->
+                </ion-grid>
+
+              </ion-radio>
+
+            </ng-container>
+          </ion-radio-group>
+        </form>
+      </div>
+
+    </ion-card-content>
+
+  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <!-- <ion-col><ion-button color="secondary" (click)="cancel()" expand="full">Cancel</ion-button></ion-col> -->
+      <ion-col>
+        <ion-button style="border-radius:20px" color="dark" expand="block" (click)="findAvehicle()">Next</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

@@ -1,0 +1,140 @@
+ion-select {
+  width: 100%;
+}
+h5 {
+  font-size: 12px;
+}
+.date-day,
+.date-time {
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+// ::ng-deep .native-wrapper {
+//   border: 0px solid #000 !important;
+//   border-radius: 3px;
+// }
+
+.picker-md .picker-prefix,
+.picker-md .picker-suffix,
+.picker-md .picker-opt.picker-opt-selected {
+  color: #fff;
+  font-family: Montserrat-Medium;
+}
+
+::ng-deep .calendar-day.calendar-day-today.calendar-day-active {
+background-color: #D4002A !important;
+color: #fff !important;
+}
+
+.dtButton{
+  border:0px !important;
+}
+
+
+
+// .pickupAddress_{
+//   background-color: aquamarine;
+// }
+#ion-input-2{
+  border:0px !important;
+}
+.date-month,
+.date-year {
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.address-picker-icon {
+  margin: 5px;
+}
+app-address-autocomplete {
+  width: 100%;
+}
+// .address-picker-item {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: flex-start;
+// }
+.search-icon {
+  position: absolute;
+  color:gray;
+  // top: 22px;
+}
+
+
+::ng-deep ion-datetime {
+  // --background: rgb(245, 235, 247);
+  // --background-rgb: 245, 235, 247;
+  --wheel-highlight-background:#D4002A !important;
+  // --wheel-fade-background-rgb: 245, 235, 247;
+}
+
+ion-datetime {
+  // --background: rgb(245, 235, 247);
+  // --background-rgb: 245, 235, 247;
+  --wheel-highlight-background:#D4002A !important;
+  // --wheel-fade-background-rgb: 245, 235, 247;
+}
+
+
+
+
+
+
+.picker-highlight {
+  
+  background:#D4002A !important;
+}
+.paragraph-red{
+  color:#D4002A !important;
+}
+
+
+.map-icon {
+  position: absolute;
+  top: 13px;
+  right: 0;
+}
+
+app-address-autocomplete .label-text-wrapper{
+  margin-top: 15px !important;
+}
+
+::ng-deep ion-item .item-inner{
+  border:0px;
+}
+
+::ng-deep .item-inner{
+  border:0px;
+}
+
+.label-text-wrapper {
+  margin-top: 10px !important;
+  margin-left: 15px !important;
+}
+
+ion-datetime-button::part(native){
+  margin-right: 13%;
+  margin-left: 7%;
+  font-size: 12px;
+  }
+
+.map-icon{
+  color: white;
+  background-color: #D4002A;
+  font-weight: 400;
+  font-size: 17px;
+  padding: 5px;
+  z-index: 9999999;
+}
+  ion-select{
+    border: 0px solid #000 ;
+    border-radius: 3px;
+    padding-top: 5px;
+      padding-bottom: 5px;
+      font-size: 12px;
+      color: gray;
+  }

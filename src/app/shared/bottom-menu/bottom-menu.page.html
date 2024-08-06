@@ -1,0 +1,28 @@
+<ion-footer>
+  <ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">      
+      <ion-tab-button (click)="bookings()">
+        <ion-label>Reservations</ion-label>
+        <ion-icon name="calendar-clear-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="profile()">
+        <ion-label>Profile</ion-label>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="newBooking()">
+        <ion-label>New</ion-label>
+        <ion-icon name="car-sport-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="help()">
+        <ion-label>Support</ion-label>
+        <ion-icon name="call-outline"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button (click)="logOut()">
+        <ion-label>Logout</ion-label>
+        <ion-icon name="power-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+  </ion-toolbar>
+  </ion-footer>

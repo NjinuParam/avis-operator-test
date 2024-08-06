@@ -1,0 +1,116 @@
+<!-- <ion-header [translucent]="true">
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+     <ion-back-button>
+     </ion-back-button>
+   </ion-buttons>
+ </ion-toolbar>
+  <ion-toolbar>
+   
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true" clss="ion-padding">
+  <h1 class="toolbar-content header" style=" margin-top:10%; font-weight: 600; font-size:2em; font-style:normal;">Welcome to Avis!<br></h1>
+  <p class="toolbar-content" style=" font-size: 14px;    padding: 0px 15px; font-weight: 600;">Register With Us Today!</p>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate style="    padding-left: 2%;
+  padding-right: 2%;
+">
+    <ion-toggle style="margin-top: 5%; margin-left:5%; font-weight: 600;" (ionChange)="switch()" [checked]="isWizardNumber"><small>I Have A  Wizard / Customer
+      Number </small></ion-toggle>
+    <div>
+
+      <ion-list>
+
+        <ion-item class="ion-margin-top" lines="none" *ngIf="isWizardNumber">
+          <ion-input type="text"  fill="outline" placeholder="Wizard / Customer Number" labelPlacement="floating" (ngModelChange)="checkValid()"
+            formControlName="wizzardNo" errorText="A valid wizard / customer number is required"></ion-input>
+        </ion-item>
+        
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text"  fill="outline" label="" placeholder="First name"  labelPlacement="floating" (ngModelChange)="checkValid()"
+            formControlName="firstName" errorText="First Name is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text"  fill="outline" placeholder="Surname" labelPlacement="floating" (ngModelChange)="checkValid()"
+            formControlName="lastName" errorText="Surname is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text"  fill="outline" placeholder="Cellphone" labelPlacement="floating" (ngModelChange)="checkValid()"
+            formControlName="contactNumber" errorText="Cellphone is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="email" placeholder="Email Address"  fill="outline" labelPlacement="floating" (ngModelChange)="checkValid()"
+            formControlName="emailAddress" errorText="A valid email is required"></ion-input>
+        </ion-item>
+        <!-- <ion-item class="ion-margin-top-5" lines="none">
+          <ion-radio-group formControlName="type">
+            <ion-radio value="corporate">Corporate</ion-radio>
+            <ion-radio value="agent" class="ion-margin-top-5">Travel Agent</ion-radio>
+            <ion-radio value="operator" class="ion-margin-top-5">Tour Operator</ion-radio>
+          </ion-radio-group>
+        </ion-item> -->
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input [type]="passwordInputType" placeholder="Password" (ngModelChange)="checkValid()"
+            labelPlacement="floating" formControlName="password"  fill="outline" 
+            errorText="Password does not meet requirements. (8 charachers; 1 special character)">
+          
+          </ion-input>
+
+          <ion-icon name="eye" style="float: right;
+          position: absolute; z-index: 999999;
+          margin-left: 80%;" slot="end" (click)="showPassword()" *ngIf="!_showPassword"
+            class="suffix-icon"></ion-icon>
+          <ion-icon style="float: right;
+          position: absolute; z-index: 999999;
+          margin-left: 80%;"  name="eye-off-outline" slot="end" (click)="showPassword()" *ngIf="_showPassword"
+            class="suffix-icon"></ion-icon>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input [type]="repasswordInputType"  fill="outline" [type]="passwordInputType" placeholder="Confirm Password"
+            (ngModelChange)="checkValid()" labelPlacement="floating" formControlName="confirmPassword"
+            errorText="Passwords do not match"></ion-input>
+            <ion-icon style="float: right;
+            position: absolute;
+            z-index: 999999;
+            margin-left: 80%;"  name="eye" slot="end" (click)="showPassword()" *ngIf="!_showPassword"
+            class="suffix-icon"></ion-icon>
+          <ion-icon style="float: right;
+          position: absolute;
+          margin-left: 80%; z-index: 999999;"  name="eye-off-outline" slot="end" (click)="showPassword()" *ngIf="_showPassword"
+            class="suffix-icon"></ion-icon>
+          <!-- <ion-icon name="eye" slot="end" (click)="showPassword()" *ngIf="!_showPassword"
+            class="suffix-icon"></ion-icon> -->
+          <!-- <ion-icon name="eye-off-outline" slot="end" (click)="showPassword()" *ngIf="_showPassword"
+            class="suffix-icon"></ion-icon> -->
+        </ion-item>
+      </ion-list>
+
+
+    </div>
+
+
+ 
+    <ion-button expand="block"  color="danger" style="padding-left: 5%; padding-right: 5%;"  class="ion-margin-top-10" type="submit">
+      Register
+    </ion-button>
+
+    <ion-button [routerLink]="['']" color="medium"   style="padding-left: 5%; padding-right: 5%;"  color="dark"  expand="block"  class="ion-margin-top-50" type="submit">
+      Cancel
+    </ion-button>
+
+  
+    <div style="margin-top:5%" class="terms">By Logging In You Are Agreeing To The Following <br><span style="color: #D4002A  !important;padding-left: 5px !important;"
+      (click)="termsAndConditions()">Terms and 
+        Conditions</span></div>
+    
+      <div class="ion-margin-top-50">
+       Already have an account?<ion-label class="underline" (click)="login()"><span class="paragraph-red" style="color:#D4002A  !important;padding-left: 5px !important;"><b>Sign In</b></span></ion-label> here
+      </div><br/><br/>
+
+  </form>
+</ion-content>
+<!-- <app-bottom-menu></app-bottom-menu> -->

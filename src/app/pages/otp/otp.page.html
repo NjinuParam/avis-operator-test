@@ -1,0 +1,89 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons >
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons>  
+  </ion-toolbar>
+  <!-- <ion-toolbar> -->
+    <!-- <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+      <ion-back-button>
+      </ion-back-button>
+    </ion-buttons> -->
+    <!-- <ion-title>Enter OTP</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+  <!-- </ion-toolbar> -->
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ion-margin-top-50">
+    
+    <ion-label *ngIf="invalid"><small style="color:red"> The entered OTP is invalid</small></ion-label>
+    <br/>
+    <br/>
+    <ion-label ><h1 class="headerOtp"> OTP Verification</h1></ion-label>
+
+    <ion-label ><p class="headerOtp"> An OTP Has Been Sent To Your Email:<br>
+     <b> {{emailOtp}}</b></p></ion-label>
+    <!-- <ion-input fill="outline" [(ngModel)]="otp" type="Number"  label="Enter OTP Here" expand="block" labelPlacement="floating" 
+    errorText="Card Number is required"></ion-input> -->
+
+    <!-- <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:5}"></ng-otp-input> -->
+    <!-- <ng-otp-input  (onInputChange)="onOtpChange($event)"  [config]="{length:5}"></ng-otp-input> -->
+<!-- 
+    <ng-otp-input  [formCtrl]="YourFormControl"  [config]="{length:5}"></ng-otp-input> -->
+
+        <ion-grid class="ion-margin-top">
+      <ion-row>
+        <ion-col>
+          <!-- <ion-item> -->
+            <ion-input #Field1 (keyup)="gotoNextField(Field2,1, Field1)" style="border:0px" type="tel" pattern="[0-9]*" maxlength="1" inputmode="numeric"
+              class="otp-input"></ion-input>
+          <!-- </ion-item> -->
+        </ion-col>
+        <ion-col>
+          <!-- <ion-item> -->
+            <ion-input #Field2 [max]="10" (keyup)="gotoNextField(Field3,2,Field2)" style="border:0px" type="tel" pattern="[0-9]*" maxlength="1"  inputmode="numeric" 
+              class="otp-input"></ion-input>
+            <!-- </ion-item> -->
+        </ion-col>
+        <ion-col>
+          <!-- <ion-item> -->
+            <ion-input #Field3 [max]="10" (keyup)="gotoNextField(Field4,3,Field3)" style="border:0px"  type="tel" pattern="[0-9]*" maxlength="1"  inputmode="numeric" 
+              class="otp-input"></ion-input>
+            <!-- </ion-item> -->
+        </ion-col>
+        <ion-col>
+          <!-- <ion-item> -->
+            <ion-input #Field4 [max]="9" (keyup)="gotoNextField(Field5,4,Field4)" style="border:0px"  type="tel" pattern="[0-9]*" maxlength="1" inputmode="numeric"  class="otp-input">
+
+            </ion-input>
+          <!-- </ion-item> -->
+        </ion-col>
+        <ion-col>
+          <!-- <ion-item> -->
+            <ion-input #Field5 [max]="9"  type="tel" pattern="[0-9]*" maxlength="1"  (keyup)="gotoNextField('',5,Field5)" inputmode="numeric" style="border:0px"  class="otp-input"></ion-input>
+          <!-- </ion-item> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- <ion-label ><p class="headerOtp ion-margin-top-10">Confirm withing:<span class="paragraph-red" style="color: rgb(240, 15, 15) !important;padding-left: 5px !important;">01:00</span></p></ion-label> -->
+
+      <ion-label ><p class="headerOtp ion-margin-top-10">Didn't Recieve Code?<span class="paragraph-red" style="color: rgb(240, 15, 15) !important;padding-left: 5px !important;" (click)="resendPassword()">Resend OTP</span> </p></ion-label>
+
+    <!-- <input type="text"   /> -->
+
+  </div>
+  <ion-button expand="block" color="dark" class="ion-margin-top-50 btn-primary" type="submit" (click)="onComplete()">
+    Next
+  </ion-button>
+</ion-content>
+<!-- <app-bottom-menu></app-bottom-menu> -->

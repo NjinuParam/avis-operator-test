@@ -1,0 +1,143 @@
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header [translucent]="true">
+    <div style=""  color="#ffffff">
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+    </div>
+    <ion-toolbar style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Passengers</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Add your passengers</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img [src]=""></ion-img>
+    </ion-toolbar>
+  </ion-header>
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>ADD PASSENGER</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" (click)="confirm()">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <ng-container *ngFor="let driver of previousDrivers">
+            <ion-item>
+              <div style="display: flex; width: 100%;">
+                <ion-checkbox (ionChange)="addDriverFromList($event, driver)"
+                >
+                  {{driver.driverTitle}}
+                  {{driver.driverFisrtName}}
+                  {{driver.driverSurname}}
+                </ion-checkbox>
+              </div>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <form [formGroup]="mainPassengerForm" (ngSubmit)="addPassenger()" style="margin-top: 5%;">
+    <div>
+      <ion-list>
+        <ion-item lines="none">
+          <ion-select label="Title"  style="border: 1px solid #b3b3b3;
+          margin-left: 0%;
+          margin-right: 0%;
+          border-radius: 3px;
+          height: 45px;
+          text-indent: 23px;
+          padding-right: 5%;
+          color: gray;" formControlName="title" (ngModelChange)="checkValid()">
+            <ion-select-option value="Mr">Mr</ion-select-option>
+            <ion-select-option value="Mrs">Mrs</ion-select-option>
+            <ion-select-option value="Ms">Ms</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="First Name" (ngModelChange)="checkValid()" fill="outline" labelPlacement="floating"
+            formControlName="name" errorText="First Name is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text" placeholder="Surname" (ngModelChange)="checkValid()" fill="outline"  labelPlacement="floating"
+            formControlName="surname" errorText="Surname is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text" placeholder="Contact Number" labelPlacement="floating" fill="outline"  formControlName="contact"
+            errorText="Contact Number is required"></ion-input>
+        </ion-item>
+      
+      </ion-list>
+
+      <ion-button [disabled]="!canAddCustomer" color="danger" expand="block" (click)="addPassenger()"
+        class="ion-margin-top">
+        Add Passenger
+      </ion-button>
+    </div>
+    <!-- <hr /> -->
+    <h4 style="    
+    text-align: left;
+    font-size: 1em;
+    margin-top: 10%;
+    margin-bottom: 5%;">Passengers <small>(up to {{maxPassengers}})</small></h4>
+    <section>
+
+      <!-- <ion-list>
+        <ion-item *ngFor="let passenger of this.booking.passengers;  let i = index">
+          <div class="passenger-list">
+            <span>
+              {{passenger.title}}
+              {{passenger.name}}
+              {{passenger.surname}}
+            </span>
+            <span>
+              <ion-icon name="trash-outline" (click)="deleteCustomer(i)" color="danger" aria-label="DELETE"
+                aria-hidden="true"></ion-icon>
+            </span>
+          </div>
+        </ion-item>
+      </ion-list> -->
+
+      <ul style="margin-bottom: 10%;" >
+        <li *ngFor="let passenger of this.passengers;  let i = index"  style="    margin-top: 5%;
+        margin-bottom: 5%;
+        border: 1px solid #b3b3b3;
+        padding: 3%;
+        border-radius: 10px;">
+          <div class="ion-padding" class="driver-info"><span>
+            {{passenger.title}}
+            {{passenger.name}}
+            {{passenger.surname}}
+          </span>
+            <a style="color:#D4002A; font-size: 14px; float:right" 
+              (click)="deleteCustomer(i)"> <span><b>Delete</b></span> </a>
+          </div>
+        </li>
+      </ul>
+      <ion-button id="open-modal" expand="block"
+     >Select from previous passengers</ion-button>
+
+    </section>
+    <!-- <ion-button color=" secondary" expand="block" class="ion-margin-top" (click)="onBack()">
+      Previous Screen
+    </ion-button> -->
+    <ion-button color="dark" expand="block" class="ion-margin-top" (click)="onNext()" >
+      Next
+    </ion-button>
+  </form>
+  <!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">additional-drivers</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

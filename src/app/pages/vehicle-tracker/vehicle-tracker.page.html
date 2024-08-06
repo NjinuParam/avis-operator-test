@@ -1,0 +1,56 @@
+
+
+<ion-content [fullscreen]="true"  class="ion-padding">
+  <ion-header [translucent]="false" style="background-color: white;">
+    <div style="" >
+      <div>
+        <ion-icon (click)="bookingSummary()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+   
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Track your driver</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Your driver is on the way</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img [src]=""></ion-img>
+      <ion-row>
+        <ion-col class="carimageholder" size="12">
+          <ion-img class="carimage"
+            [src]="vehicleImage"></ion-img>
+        </ion-col>
+        
+      </ion-row> 
+      <ion-row>
+        <ion-col class="carimageholder" size="4">
+          <p></p>
+        </ion-col> 
+      </ion-row> 
+      <div class="trip-details">
+        <p style="font-weight: 600; font-size: 14px;">{{currentLeg?.vehicleTypeDescription}}  </p>
+        <p style="font-weight: 600; font-size: 10px;">{{currentLeg?.customerProfileDesc}}</p>
+        <p style="font-weight: 600; font-size: 10px;">{{toFriendlyDate(currentLeg?.collectionDateTime)}} ({{currentLeg?.collectionAddress.name}}) until  {{toFriendlyDate(currentLeg?.destinationDateTime)}} ({{currentLeg?.destinationAddress?.name}}) </p>
+
+        <br/>
+      </div>
+    </div>
+  </ion-header>
+
+
+  <div class=" container">
+    <!-- <capacitor-google-map id="map" #map></capacitor-google-map> -->
+    <div #map class="map" id="googleMap"></div>
+    <div class="ion-padding bottom-buttons">
+      <div class="call-avis">
+        <ion-button color="danger" (click)="emergency()"  expand="block" >Call Avis</ion-button>
+        <ion-button color="dark"  expand="block" (click)="bookingSummary()">Reservation details</ion-button>
+      </div>
+      <!-- <ion-button expand="full" color="secondary">Back</ion-button> -->
+    </div>
+  </div>
+  
+</ion-content>

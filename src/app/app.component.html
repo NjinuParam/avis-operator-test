@@ -1,0 +1,13 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>
+<!-- <div *ngIf="offers.length>0" class="alert alert-warning" role="alert">
+  <li *ngFor="let item of offers">
+    Offers: {{item}}
+  </li>
+</div> -->
+<div  *ngIf="loading" class="loading-container flex-content-center">
+  <div id="loader-container" style="background-color: transparent;">
+    <ion-spinner name="crescent" color="danger"></ion-spinner>
+  </div>
+</div>

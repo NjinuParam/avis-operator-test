@@ -1,0 +1,166 @@
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header [translucent]="false" style="background-color: white;">
+
+    <div style=""  color="#ffffff">
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+    </div>
+    <ion-toolbar style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+  
+      <div class="vehicle-text-header">
+        <ion-text style="font-size: 1.2em; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px;">Additional Drivers</ion-text>
+        <small style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Add your additional drivers</small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img [src]=""></ion-img>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>ADD DRIVERS</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" (click)="confirm()">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-list>
+          <ng-container *ngFor="let driver of previousDrivers">
+            <ion-item>
+              <div style="display: flex; width: 100%;">
+                <ion-checkbox (ionChange)="addDriverFromList($event, driver)"
+                  [disabled]="additionalDrivers.length >= additionalDriversCount + 1 && !driver.canDeselect">
+                  {{driver.driverTitle}}
+                  {{driver.driverFisrtName}}
+                  {{driver.driverSurname}}
+                </ion-checkbox>
+              </div>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <form [formGroup]="additionalDriverForm" (ngSubmit)="addDriver()">
+    <div>
+      <ion-list>
+        <ion-item  lines="none">
+          <ion-select label="Title" label-placement="floating" style="border: 1px solid #b3b3b3;
+          margin-left: 0%;
+          margin-right: 0%;
+          border-radius: 4px;
+          height: 45px;
+          text-indent: 23px;
+          padding-right: 5%;
+          color: gray;" formControlName="title" (ngModelChange)="checkValid()">
+            <ion-select-option value="MR">Mr</ion-select-option>
+            <ion-select-option value="MRS">Mrs</ion-select-option>
+            <ion-select-option value="MS">Ms</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" (ngModelChange)="checkValid()" fill="outline" placeholder="First Name" labelPlacement="floating"
+            formControlName="name" errorText="First Name is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text" (ngModelChange)="checkValid()" fill="outline"  placeholder="Surname" labelPlacement="floating"
+            formControlName="surname" errorText="Surname is required"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text" (ngModelChange)="checkValid()" fill="outline"  placeholder="ID Number" labelPlacement="floating"
+            formControlName="idNumber" errorText="ID Number is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input type="text" (ngModelChange)="checkValid()" fill="outline"  placeholder="Licence Number" labelPlacement="floating"
+            formControlName="licence" errorText="Licence Number is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-grid>
+            <ion-row  style="border: 1px solid #b3b3b3;
+            border-radius: 3px;
+            height: 45px;
+            text-indent: 23px;
+            color: silver;
+            width: 103%;
+            margin-left: -5px;">
+              <ion-col>
+                <ion-text>Date of Birth</ion-text>
+              </ion-col>
+              <ion-col>
+                <ion-datetime-button [disabled]="formDisabled" datetime="datetime"></ion-datetime-button>
+                <ion-modal [keepContentsMounted]="true" #dob>
+                  <ng-template>
+                    <ion-datetime #datetime id="datetime" presentation="date" [max]="maxDOb"
+                      (ionChange)="checkDOb($event)"
+                      [value]="this.driverBob"
+                    >
+                      <ion-buttons slot="buttons">
+                        <ion-button color="primary" (click)="datetime.confirm(); dob.dismiss();">Done</ion-button>
+                      </ion-buttons>
+                    </ion-datetime>
+                  </ng-template>
+                </ion-modal>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <!-- <ion-item (click)="takePicture($event)" [disabled]="formDisabled" style="border: 1px solid #b3b3b3;
+        margin-left: 4%;
+        margin-right: 4%;
+        border-radius: 4px;
+        height: 45px;
+        text-indent: 23px;
+        color: gray;
+        margin-top: 5px;">
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+         
+          <span class="licence-label">Drivers Licence</span>
+        </ion-item> -->
+       
+      </ion-list>
+      <ion-button [disabled]="!canAddDriver" color="danger" expand="block" (click)="addDriver()" class="ion-margin-top">
+        Add Driver
+      </ion-button>
+    </div>
+    <ion-button id="open-modal" expand="block"
+      [disabled]="additionalDrivers.length >= additionalDriversCount + 1">Select from previous drivers</ion-button>
+    <h4 style="text-align: center;" style="    text-align: left;
+    font-size: 1em;
+    margin-top: 10%;
+    margin-bottom: 5%;">Drivers</h4>
+    <section>
+
+      <ul style="margin-bottom: 10%;" >
+        <li *ngFor="let driver of additionalDrivers;  let i = index" style="    margin-top: 5%;
+        margin-bottom: 5%;
+        border: 1px solid #b3b3b3;
+        padding: 3%;
+        border-radius: 10px;">
+          <div class="ion-padding" class="driver-info"><span>{{driver.title}} {{driver.name}} {{driver.surname}}</span>
+            <a style="color:#D4002A; font-size: 14px;" *ngIf="driver.idNumber!== booking.customer.customerIdPassport"
+              (click)="deleteDriver(i)"> <span><b>Delete</b></span> </a>
+          </div>
+
+          <ion-img class="ion-padding" [src]="driver.licenceImage" alt="" *ngIf="driver.licenceImage"></ion-img>
+        </li>
+      </ul>
+
+    </section>
+    <!-- <ion-button color="secondary" expand="full" class="ion-margin-top" (click)="onBack()">
+      Previous Screen
+    </ion-button> -->
+    <ion-button [disabled]="additionalDrivers.length===0" color="dark" expand="block" class="ion-margin-top"
+      (click)="onNext()">
+      Next
+    </ion-button>
+  </form>
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

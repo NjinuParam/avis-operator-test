@@ -1,0 +1,181 @@
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header [translucent]="false" style="background-color: white;">
+
+
+    <div style="" >
+      <div>
+        <ion-icon (click)="back()" style="height: 50px; font-weight:50px;  --ionicon-stroke-width: 20px; width: 50px;" name="arrow-back-circle-outline"></ion-icon>
+      </div>
+     
+    </div>
+    <ng-container *ngIf="vehicle$ | async as vehicle">
+    <div  >
+  
+      <!-- <div class="vehicle-text-header"> -->
+        <p style="font-size: 1.2em; margin-top: 0px; margin-bottom: 0px; padding-top: 0px !important; font-weight: 600;padding: 5%;
+        padding-bottom: 0px; color:black">{{vehicle.vehicleTypeDescription}} {{booking.vehicle.description}}</p>
+        <small *ngIf="booking.bookingType.id==1" style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Luxury Cars </small>
+        <small *ngIf="booking.bookingType.id==2" style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Point 2 Point </small>
+        <small *ngIf="booking.bookingType.id==3" style="color: lightgrey; padding-bottom: 10px; padding-left: 5%;">Chauffeur Drive </small>
+        <!-- <ion-icon name="heart-outline"></ion-icon> -->
+      </div>
+      <ion-img  [src]=""></ion-img>
+    <!-- </div> -->
+    <div style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+     
+      <ion-img  [src]="vehicle.image.storageUrl"></ion-img>
+    </div> 
+
+    </ng-container>
+  </ion-header>
+  
+ 
+  <ng-container *ngIf="vehicle$ | async as vehicle">
+
+
+  
+
+  
+    
+
+    <ion-grid class="ion-margin-top-5">
+      <ion-row>
+        <ion-col style="font-size: 13px; font-weight: 600;">
+         <img style="width: 20px; margin-right: 5%;" src="../../../assets/images/icons/car-door.png">
+          No of Doors:
+        </ion-col>
+        <ion-col style="font-size: 13px; font-weight: 600;     padding-top: 12px;">
+          {{vehicle.doors}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="font-size: 13px; font-weight: 600;">
+          <img style="width: 20px; margin-right: 5%;" src="../../../assets/images/icons/passenger.png">
+          Max passengers:
+        </ion-col>
+           <ion-col style="font-size: 13px; font-weight: 600;     padding-top: 12px;">
+          {{vehicle.maxPassengers}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="font-size: 13px; font-weight: 600;">
+          <img style="width: 20px; margin-right: 5%;" src="../../../assets/images/icons/suitcase.png">
+          No. of Suitcases:
+        </ion-col>
+        <ion-col style="font-size: 13px; font-weight: 600;     padding-top: 12px;">
+          {{vehicle.suitCases}}
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="">
+        <ion-col style="font-size: 13px; font-weight: 600;">
+          <img style="width: 20px; margin-right: 5%;" src="../../../assets/images/icons/transmission.png">
+          Transmission:
+        </ion-col>
+        <ion-col style="font-size: 13px; font-weight: 600;     padding-top: 12px;">
+          {{vehicle.transmissionType}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="font-size: 13px; font-weight: 600;">
+          <img style="width: 20px; margin-right: 5%;" src="../../../assets/images/icons/petrol.png">
+          Fuel type:
+        </ion-col>
+        <ion-col style="font-size: 13px; font-weight: 600;     padding-top: 12px;">
+          {{vehicle.fuelType}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-margin-top-5" *ngIf="booking.bookingType.id===1">
+      <sub style="font-size: 13px;"> Note: Minimum age for this vehicle is 25 years of age. Renters be-tween 21 & 25 will be at managers
+        discretion and
+        a young drivers sur-charge will apply.</sub>
+    </div>
+    <!-- <div class="ion-margin-top-5" style="margin-top: 20px; margin-bottom: 20px; font-weight: 600;">
+      <ion-text style="font-weight: 600;">
+Selected Accessories
+      </ion-text>
+
+        <div *ngFor="let extra of selectedAccessories; let i = index" style="margin-top:10px">
+          <ion-text style="    padding: 5%;
+          font-size: 12px;">
+           {{extra.qty}}x {{extra.option | titlecase}} -  R{{extra.qty* extra.cost}}
+           </ion-text>
+         
+        </div> 
+
+    </div>
+   <br /><br /> -->
+   <!-- <div  style="clear: both; font-size: 12px; text-decoration: underline; margin-bottom: 10%;">
+    <a style="color: #D4002A; " (click)="onViewSummary()">View Rental Summary</a>
+  </div> -->
+  <ion-row>
+    <ion-col style="margin-top: 10%;">
+      <p  style="font-size: 12px;
+      font-weight: 600; text-align: left; margin-top: 5%; margin-bottom: 5%;"  *ngIf="selectedAccessories.length>0">ACCESSORIES</p>
+      <table style="width: 100%;">
+        <tr style="text-align: left;">
+          <th style="font-size: 12px;
+          font-weight: 600; ">Description</th>
+          <th style="font-size: 12px;
+          font-weight: 600; ">QTY</th>
+          <th style="font-size: 12px;
+          font-weight: 600; ">Charge</th>
+          <th style="font-size: 12px;
+          font-weight: 600; ">Total</th>
+        </tr>
+        <tr></tr>
+        <tr *ngFor="let accessory of  filteredAccessories()" >
+          <td  style="font-size: 12px;">
+            <ion-text  style="font-size: 12px; " class="ion-margin-top">{{ accessory.option }}</ion-text>
+          </td>
+          <td style="text-align: center;">
+            <ion-text  style="font-size: 12px;" class="ion-margin-top">{{accessory.qty}}</ion-text> 
+          </td>
+          <td style="font-size: 12px;">
+            <ion-text  style="font-size: 12px;" class="ion-margin-top">{{ accessory.cost | currency: 'R':true:'1.0-0'}}</ion-text> 
+          </td>
+          <td style="font-size: 12px;">
+            <ion-text  style="font-size: 12px;" class="ion-margin-top">{{getExtraTotal(accessory) | currency: 'R':true:'1.0-0'}}</ion-text> 
+          </td>
+        </tr>
+       
+        <tr *ngFor="let fee of booking?.vehicle?.feeBreakdown?.fee">
+
+          <td>
+            <ion-text  style="font-size: 11px;" class="ion-margin-top">{{fee.feeType}}: </ion-text>
+          </td>
+          <td  style="font-size: 11px; text-align: center;">
+            <ion-text  style="font-size: 11px;" class="ion-margin-top"> 1</ion-text>
+          </td>
+          <td>
+            <ion-text  style="font-size: 11px;" class="ion-margin-top">{{fee.price | currency : "R":true:'1.0-0' }} </ion-text>
+          </td>
+          <td>
+            <ion-text  style="font-size: 11px;" class="ion-margin-top">{{fee.price | currency : "R":true:'1.0-0' }} </ion-text>
+          </td>
+        </tr>
+    
+      </table>
+      <!-- <p *ngIf="leg?.equipment?.equipment">Accessories</p>
+      <ion-text *ngFor="let accessory of leg?.equipment?.equipment">
+
+        <p>
+          {{accessory.quantity}} X {{accessory.description}} @ {{accessory.amount | currency : 'R'}}
+        </p>
+      </ion-text> -->
+    </ion-col>
+  </ion-row>
+
+    <div  style="clear: both; font-size: 12px; text-decoration: underline; margin-top: 15%;">
+      <!-- <a style="color: #D4002A; " (click)="onViewSummary()">View Rental Summary</a> -->
+    </div>
+    <ion-button expand="block" class="ion-margin-top-10" color="dark" (click)="onChangeVehicle()">
+      Change Vehicle
+    </ion-button>
+    <ion-button expand="block" color="danger" class="mt-2 ion-margin-top-20" (click)="onConfirmVehicle()">
+      Confirm Vehicle
+    </ion-button>
+  </ng-container>
+</ion-content>
+<app-bottom-menu></app-bottom-menu>

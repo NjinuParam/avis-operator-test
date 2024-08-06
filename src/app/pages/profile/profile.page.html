@@ -1,0 +1,183 @@
+<!-- -->
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-toolbar style="border-bottom: 5px solid #D4002A;"  color="#ffffff">
+    <h1 style="font-size: 2em; font-weight: 600;   " class="toolbar-content header">Update Profile<br></h1>
+    <p class="toolbar-content ion-text-center" style=" font-weight: 600;  padding: 0px 15px;  font-size: 14px;"> 
+      <b style="font-weight: 600;">You’re One Stop Away From<br> Booking Your Favourite Car! </b></p>
+  </ion-toolbar>
+  <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" novalidate>
+    <div>
+      <ion-list class="ion-margin-top">
+        <ion-item style="border: 1px solid #b3b3b3;
+        width: 91%;
+        margin-left: 16px;
+        border-radius: 0px 3px 3px 0px;
+        margin-bottom: 10px;
+        height: 46px;">
+          <ion-label style="width: 50%;">Title</ion-label>
+          <ion-select style="width: 25%;" expand="block"  formControlName="title" placeholder="">
+            <!--
+            <ion-select-option value="Mr">Mr</ion-select-option>
+            <ion-select-option value="Mrs">Mrs</ion-select-option>
+            <ion-select-option value="Ms">Ms</ion-select-option> -->
+            <ion-select-option *ngFor="let title of titles" [value]="title.value">{{ title.label }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none" >
+          <ion-input expand="block" fill="outline"  type="text" placeholder="First Name" labelPlacement="floating" formControlName="firstname"
+            errorText="First Name is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input expand="block" fill="outline" type="text" placeholder="Surname" labelPlacement="floating" formControlName="surname"
+            errorText="Surname is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input expand="block" fill="outline"  type="text" placeholder="Mobile number" labelPlacement="floating" formControlName="cellPhone"
+            errorText="Mobile number is required"></ion-input>
+            
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input  expand="block" fill="outline"  [disabled]="true" type="email" placeholder="Email Address" labelPlacement="floating"
+            formControlName="email" errorText="A valid email is required"></ion-input>
+        </ion-item>
+
+
+
+        <ion-item style=  "margin-top: 3%;
+        border: 1px solid #b3b3b3;
+        color: gray;
+        
+        width: 91%;
+        margin-left: 15px;
+        border-radius: 0px 3px 3px 0px;" class="ion-margin-top-5" lines="none">
+          <ion-label>Date of Birth</ion-label>
+          <!-- <ion-datetime-button (ionChange)="dateTimeUpdated($event)" datetime="datetime"></ion-datetime-button>
+
+          <ion-modal [keepContentsMounted]="true"  #startDateModal>
+            <ng-template>
+              <ion-datetime #datetime id="datetime" presentation="date">
+                <ion-buttons slot="buttons" style="">
+                  <ion-button color="primary" style="background-color: lightgray;
+                  font-weight: 500;
+                  border-radius: 3px;
+                  font-size: 13px; color:black" (click)="datetime.cancel()">Cancel</ion-button>
+
+                  <ion-button color="light" style="background-color: #D4002A;
+                   font-weight: 500;
+                  border-radius: 3px;
+                  font-size: 13px; color:white" (click)="datetime.confirm(); startDateModal.dismiss()">Confirm</ion-button>
+                </ion-buttons>
+
+              </ion-datetime>
+            </ng-template>
+          </ion-modal> -->
+
+          <ion-datetime-button  datetime="datetime"></ion-datetime-button>
+          <ion-modal [keepContentsMounted]="true" #dob>
+            <ng-template>
+              <ion-datetime #datetime id="datetime" presentation="date" 
+                (ionChange)="checkDOb($event)"
+                [value]="getDate()">
+                <ion-buttons slot="buttons">
+                  <ion-button color="primary" (click)="datetime.confirm(); dob.dismiss();">Done</ion-button>
+                </ion-buttons>
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+
+        </ion-item>
+        <ion-item class="ion-margin-top-5" style="margin-top: 5%;" lines="none">
+          <ion-input expand="block" fill="outline"  type="text" placeholder="SA-ID/ Passport Number" labelPlacement="floating" formControlName="idNumber"
+            errorText="SA-ID/Passport number is required"></ion-input>
+        </ion-item>
+
+
+      </ion-list>
+
+      <ion-list class="ion-margin-top-5 bookings-container" style="margin-top: 10%;">
+        <ion-text class="ion-margin-top-5 ion-text-center"><strong>Drivers licence</strong></ion-text>
+        <ion-item class="ion-margin-top-5" lines="none" style="margin-top: 5%;">
+          <ion-input expand="block" fill="outline"  type="text" placeholder="Drivers Licence Number (PPN)" labelPlacement="floating"
+            formControlName="licenceNumber" errorText="Drivers licence Number (PPN) is required"></ion-input>
+        </ion-item>
+        <ion-item style="margin-top: 5%;">
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+          <span class="licence-label">Drivers Licence</span>
+          <input expand="block" fill="outline"  name="driversLicence" type="file" (change)="getFile($event, 'DriversLicence')" />
+        </ion-item>
+
+      </ion-list>
+
+      <ion-list class="ion-margin-top-5 bookings-container" style="margin-top: 10%;">
+        <ion-text class="ion-margin-top-5 ion-text-center"><strong>Billing details</strong></ion-text>
+        <ion-item class="ion-margin-top-5" style="margin-top: 2%; margin-bottom: 5%;" lines="none">
+          <!-- <ion-label>Credit card Holder's Name</ion-label> -->
+          <ion-input expand="block" fill="outline"  type="text" [value]="ccHolder" readonly label="Credit card holder's name" labelPlacement="floating"
+            formControlName="creditCardHolder"></ion-input>
+        </ion-item>
+        <ion-item>
+          <small><span style="color:#D4002A  !important;padding-left: 5px !important;"
+            href="https://www.avis.co.za/luxury-car-hire/terms-and-conditions"><b>Kindly Note!</b></span> The Credit Card Holder And Renter Must
+            Be Same For Avis Luxury Car Rentals.
+          </small>
+        </ion-item>
+        <ion-item class="ion-margin-top-5" lines="none">
+          <ion-label>Credit card information</ion-label><br/>
+          <!-- <ion-input expand="block" fill="outline" type="tel" placeholder="Credit card" labelPlacement="floating" formControlName="creditCard"
+            maxlength="16" pattern="[0-9]*"></ion-input> -->
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <!-- <ion-label>Credit card information</ion-label><br/> -->
+          <ion-input expand="block" fill="outline" type="tel" placeholder="Credit card" labelPlacement="floating" formControlName="creditCard"
+            maxlength="16" pattern="[0-9]*"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none" style="border: 1px solid #b3b3b3;
+        width: 91%;
+        margin-left: 16px;
+        border-radius: 0px 3px 3px 0px;
+        margin-bottom: 10px;
+        height: 46px;
+        ">
+          <ion-label style="width: 50%; color:gray;">Expiry date</ion-label>
+          <ion-select style="width: 65%; color:gray;" expand="block"   formControlName="expiryDate">
+            <ion-select-option   *ngFor="let monthYear of monthYears" [value]="monthYear.val">{{ monthYear.label
+              }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- <ion-item class="ion-margin-top-5" lines="none">
+          <ion-input  maxlength="4" type="tel"  label="CVV"   maxlength="3" labelPlacement="floating" formControlName="cvv"
+            errorText="A valid cvv is required"></ion-input>
+        </ion-item> -->
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input expand="block" fill="outline"  type="text" placeholder="Billing Address 1" labelPlacement="floating"
+            formControlName="billingAddressLine1" errorText="Billing Address 1 is required"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input expand="block" fill="outline"  type="text" placeholder="Billing Address 2" labelPlacement="floating"
+            formControlName="billingAddressLine2" errorText="Billing Address 2 is required"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </div>
+
+    <ion-button expand="block" (click)="updateProfile()" color="danger" class="ion-margin-top" type="submit">
+      Update Profile
+    </ion-button>
+   
+    
+ 
+  </form>
+
+  <div class="terms ion-margin-top">
+    <ion-alert trigger="present-alert" header="Are you sure you want to delete your profile?" [buttons]="alertButtons"></ion-alert>
+    <ion-button id="present-alert" expand="block">Delete profile</ion-button>
+    <!-- <small><span style="color:#D4002A  !important;padding-left: 5px !important;"
+    href="https://www.avis.co.za/luxury-car-hire/terms-and-conditions"><b>Kindly Note!</b></span> The Credit Card Holder And Renter Must
+    Be Same For Avis Luxury Car Rentals.
+  </small> -->
+</div>
+
+</ion-content>
+<app-bottom-menu></app-bottom-menu>
